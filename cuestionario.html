@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cuestionario - Programación de Base de Datos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📚 Cuestionario: Programación de Base de Datos</h1>
+            <p class="subtitle">Prepárate para tu examen con este cuestionario completo</p>
+        </header>
+
+        <div id="start-screen" class="screen">
+            <div class="welcome-card">
+                <h2>🎯 Configura tu Cuestionario</h2>
+                <p>Personaliza tu examen según tus necesidades:</p>
+                
+                <div class="config-section">
+                    <h3>📊 Cantidad de Preguntas</h3>
+                    <div class="config-options">
+                        <label class="config-option">
+                            <input type="radio" name="quantity" value="25" checked>
+                            <span class="config-label">
+                                <strong>25 preguntas</strong>
+                                <small>~15 minutos</small>
+                            </span>
+                        </label>
+                        <label class="config-option">
+                            <input type="radio" name="quantity" value="50">
+                            <span class="config-label">
+                                <strong>50 preguntas</strong>
+                                <small>~30 minutos</small>
+                            </span>
+                        </label>
+                        <label class="config-option">
+                            <input type="radio" name="quantity" value="75">
+                            <span class="config-label">
+                                <strong>75 preguntas (Completo)</strong>
+                                <small>~45 minutos</small>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="config-section">
+                    <h3>🎲 Tipos de Preguntas</h3>
+                    <div class="config-options">
+                        <label class="config-option">
+                            <input type="radio" name="questionType" value="all" checked>
+                            <span class="config-label">
+                                <strong>Todas mezcladas</strong>
+                                <small>Variedad completa</small>
+                            </span>
+                        </label>
+                        <label class="config-option">
+                            <input type="radio" name="questionType" value="multiple">
+                            <span class="config-label">
+                                <strong>Solo Selección Múltiple</strong>
+                                <small>Elige la respuesta correcta</small>
+                            </span>
+                        </label>
+                        <label class="config-option">
+                            <input type="radio" name="questionType" value="truefalse">
+                            <span class="config-label">
+                                <strong>Solo Verdadero/Falso</strong>
+                                <small>Afirmaciones simples</small>
+                            </span>
+                        </label>
+                        <label class="config-option">
+                            <input type="radio" name="questionType" value="matching">
+                            <span class="config-label">
+                                <strong>Solo Emparejar</strong>
+                                <small>Conecta conceptos</small>
+                            </span>
+                        </label>
+                        <label class="config-option">
+                            <input type="radio" name="questionType" value="ordering">
+                            <span class="config-label">
+                                <strong>Solo Ordenar</strong>
+                                <small>Secuencia correcta</small>
+                            </span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="stats">
+                    <p><strong>📚 Temas incluidos:</strong></p>
+                    <div class="topics-grid">
+                        <span>Fundamentos SQL</span>
+                        <span>DDL, DML, DCL, TCL</span>
+                        <span>SELECT y Sintaxis</span>
+                        <span>GROUP BY y HAVING</span>
+                        <span>Funciones Agregadas</span>
+                        <span>JOINs y SubConsultas</span>
+                    </div>
+                </div>
+
+                <button id="start-btn" class="btn btn-primary">🚀 Comenzar Cuestionario</button>
+            </div>
+        </div>
+
+        <div id="quiz-screen" class="screen hidden">
+            <div class="progress-bar">
+                <div id="progress-fill" class="progress-fill"></div>
+            </div>
+            <div class="quiz-header">
+                <span class="question-counter">Pregunta <span id="current-q">1</span> de <span id="total-q">0</span></span>
+                <span class="score">Puntaje: <span id="current-score">0</span></span>
+            </div>
+
+            <div id="question-container" class="question-container">
+                <!-- Las preguntas se cargarán dinámicamente aquí -->
+            </div>
+
+            <div class="quiz-controls">
+                <button id="check-btn" class="btn btn-primary">Verificar Respuesta</button>
+                <button id="next-btn" class="btn btn-secondary hidden">Siguiente Pregunta</button>
+            </div>
+        </div>
+
+        <div id="results-screen" class="screen hidden">
+            <div class="results-card">
+                <h2>🎉 ¡Cuestionario Completado!</h2>
+                <div class="final-score">
+                    <div class="score-circle">
+                        <span id="final-score">0</span>
+                        <span class="score-total">/ <span id="max-score">0</span></span>
+                    </div>
+                    <p id="score-message" class="score-message"></p>
+                </div>
+                <div class="results-stats">
+                    <div class="stat">
+                        <span class="stat-label">Correctas</span>
+                        <span id="correct-count" class="stat-value correct">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Incorrectas</span>
+                        <span id="incorrect-count" class="stat-value incorrect">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Porcentaje</span>
+                        <span id="percentage" class="stat-value">0%</span>
+                    </div>
+                </div>
+                <div class="results-actions">
+                    <button id="restart-btn" class="btn btn-primary">Reintentar Cuestionario</button>
+                    <button id="review-btn" class="btn btn-secondary">Revisar Respuestas</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="review-screen" class="screen hidden">
+            <div class="review-header">
+                <h2>📝 Revisión de Respuestas</h2>
+                <button id="back-to-results-btn" class="btn btn-secondary">Volver a Resultados</button>
+            </div>
+            <div id="review-container" class="review-container">
+                <!-- Las respuestas revisadas se cargarán aquí -->
+            </div>
+        </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
